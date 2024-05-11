@@ -1,3 +1,7 @@
+import model.CBGV
+import model.Nguoi
+import kotlin.system.exitProcess
+
 val ql = QuanLyCBGV()
 
 fun main() {
@@ -78,7 +82,7 @@ fun xoa() {
     var canXoa = ql.layDanhSach().elementAt(xoa - 1).nguoi.maSoGiaoVien
 
     ql.xoaCBGV(canXoa)
-//    tiepTuc(listSV)
+    tiepTuc()
 }
 fun them(){
 
@@ -194,8 +198,19 @@ fun them(){
     // thêm vào danh sách
     ql.themCBGV(gvMoi)
 
-//    tiepTuc(listSV)
+    tiepTuc()
 
+}
+
+fun tiepTuc() {
+    ql.inRaDanhSach()
+    print("Bạn có muốn tiếp tục không (có: 1): ")
+    var tiep = readLine()!!
+    if (tiep != "1") {
+        // thoat chuong trinh
+        exitProcess(0)
+    }
+    quanLy(nhapChucNang())
 }
 
 

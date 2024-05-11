@@ -1,3 +1,5 @@
+import model.CBGV
+
 class QuanLyCBGV {
     private val listCBGV = mutableListOf<CBGV>()
 
@@ -9,17 +11,12 @@ class QuanLyCBGV {
         listCBGV.removeAll { it.nguoi.maSoGiaoVien == maSoGV }
     }
 
-    fun hienThiDanhSach() {
-        listCBGV.forEach {
-            it.inThongTin()
-            println()
-        }
-    }
-
     fun inRaDanhSach() {
         println("---------------------Danh sách giáo viên---------------------------------------------------------")
         // cách duyệt theo index
-        hienThiDanhSach()
+        listCBGV.forEach {
+            it.inThongTin()
+        }
 
         println("-------------------------------------------------------------------------------------------------")
     }
