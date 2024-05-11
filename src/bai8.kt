@@ -1,33 +1,30 @@
-import manage.QuanLyCBGV
+import manage.QuanLyThuVien
 import model.CBGV
 import model.Nguoi
+import model.SinhVien
+import model.TheMuon
 import kotlin.system.exitProcess
 
-private val ql = QuanLyCBGV()
+private val ql = QuanLyThuVien()
 
 fun main() {
 
-    val nguoi1 = Nguoi("Nguyễn Văn A", "Hà Nội", "GV001")
-    val cbgv1 = CBGV(1000.0, 200.0, 50.0, nguoi1)
+    val the1 = TheMuon("001", 1, 2, "SH001", SinhVien("Nguyễn Văn A", 20, "K62"))
+    val the2 = TheMuon("002", 2, 3, "SH002", SinhVien("Nguyễn Văn B", 21, "K63"))
 
-    val nguoi2 = Nguoi("Nguyễn Văn B", "Hà Nội", "GV002")
-    val cbgv2 = CBGV(2000.0, 300.0, 100.0, nguoi2)
-
-    ql.themCBGV(cbgv1)
-    ql.themCBGV(cbgv2)
+    ql.themTheMuon(the1)
+    ql.themTheMuon(the2)
 
     ql.inRaDanhSach()
     quanLy(nhapChucNang())
-
-    ql.inRaDanhSach()
 
 
 }
 
 private fun nhapChucNang(): String {
     println("---------------------Chức năng-------------------------------------------------------------------")
-    println("1. Xóa 1 giáo viên trong danh sách")
-    println("2. Thêm 1 giáo viên vào danh sách")
+    println("1. Xóa 1 thẻ mượn trong danh sách")
+    println("2. Thêm 1 thẻ mượn vào danh sách")
 
     println("-------------------------------------------------------------------------------------------------")
     // validate và chọn chức năng
@@ -58,8 +55,8 @@ private fun quanLy(chucNang: String?) {
 }
 
 private fun xoa() {
-    var soLuongGv = ql.soLuongGV()
-    if (soLuongGv == 0) {
+    var soLuongThe = ql.soLuongTheMuon()
+    if (soLuongThe == 0) {
         println("Danh sách rỗng")
         tiepTuc()
     }
@@ -67,10 +64,10 @@ private fun xoa() {
 
     while (true) {
         try {
-            print("Bạn muốn xóa giáo viên thứ mấy: ")
+            print("Bạn muốn xóa thẻ thứ mấy: ")
             xoa = readLine()!!.toInt()
-            if (xoa < 1 || xoa > soLuongGv) {
-                println("Vui lòng nhập số từ 1 -> $soLuongGv")
+            if (xoa < 1 || xoa > soLuongThe) {
+                println("Vui lòng nhập số từ 1 -> $soLuongThe")
                 continue
             }
             break
@@ -79,20 +76,20 @@ private fun xoa() {
         }
     }
 
-    var canXoa = ql.layDanhSach().elementAt(xoa - 1).nguoi.maSoGiaoVien
+    var canXoa = ql.layDanhSach().elementAt(xoa - 1).maPhieuMuon
 
-    ql.xoaCBGV(canXoa)
+    ql.xoaTheMuon(canXoa)
     tiepTuc()
 }
 
 private fun them() {
 
-    println("Thêm giáo viên:")
+    println("Thêm thẻ mượn")
 
     // validate và nhập tên
     var ten: String
     while (true) {
-        print("Tên giáo viên: ")
+        print("Tên sinh viên: ")
         ten = readLine()!!
         if (ten.isEmpty()) {
             println("Vui lòng không để trống")
@@ -129,73 +126,81 @@ private fun them() {
         break
     }
 
-    // validate và nhập mã số giáo viên
-    var msgv: String
+    // validate và nhập lớp
+    var lop: String
     while (true) {
-        print("Mã số giáo viên: ")
-        msgv = readLine()!!
-        if (msgv.isEmpty()) {
+        print("Lớp: ")
+        lop = readLine()!!
+        if (lop.isEmpty()) {
             println("Vui lòng không để trống")
             continue
         }
         break
     }
 
-    // validate và nhập lương cứng
-    var luongCung: Double
+    // validate và nhập mã phiếu mượn
+    var maPhieu: String
+    while (true) {
+        print("Mã phiếu mượn: ")
+        maPhieu = readLine()!!
+        if (maPhieu.isEmpty()) {
+            println("Vui lòng không để trống")
+            continue
+        }
+        break
+    }
+
+    // validate và nhập ngày mượn
+    var ngayMuon: Int
     while (true) {
         try {
-            print("Lương cứng: ")
-            luongCung = readLine()!!.toDouble()
-            if (luongCung < 0) {
-                println("Vui lòng nhập lương lớn hơn 0")
+            print("Ngày mượn: ")
+            ngayMuon = readLine()!!.toInt()
+            if (ngayMuon < 0|| ngayMuon > 31) {
+                println("Vui lòng nhập ngày > 0 và < 31")
                 continue
             }
             break
         } catch (e: Exception) {
-            println("Vui lòng nhập lương là số")
+            println("Vui lòng nhập ngày là số")
         }
     }
 
-    // validate và nhập lương thưởng
-    var luongThuong: Double
+    // validate và nhập hạn trả
+    var hanTra: Int
     while (true) {
         try {
-            print("Lương thưởng: ")
-            luongThuong = readLine()!!.toDouble()
-            if (luongThuong < 0) {
-                println("Vui lòng nhập lương lớn hơn 0")
+            print("Hạn trả: ")
+            hanTra = readLine()!!.toInt()
+            if (hanTra < 0|| hanTra > 31) {
+                println("Vui lòng nhập hạn trả > 0 và < 31")
                 continue
             }
             break
         } catch (e: Exception) {
-            println("Vui lòng nhập lương là số")
+            println("Vui lòng nhập hạn trả là số")
         }
     }
 
-    // validate và nhập tiền phạt
-    var tienPhat: Double
+    // validate và nhập số hiệu sách
+    var soHieuSach: String
     while (true) {
-        try {
-            print("Tiền phạt: ")
-            tienPhat = readLine()!!.toDouble()
-            if (tienPhat < 0) {
-                println("Vui lòng nhập tiền phạt lớn hơn 0")
-                continue
-            }
-            break
-        } catch (e: Exception) {
-            println("Vui lòng nhập tiền phạt là số")
+        print("Số hiệu sách: ")
+        soHieuSach = readLine()!!
+        if (soHieuSach.isEmpty()) {
+            println("Vui lòng không để trống")
+            continue
         }
+        break
     }
 
 
     // tạo đối tượng mới
-    val gvMoi = CBGV(luongCung, luongThuong, tienPhat, Nguoi(ten, queQuan, msgv))
-
-    // thêm vào danh sách
-    ql.themCBGV(gvMoi)
-
+    val theMoi = TheMuon(maPhieu, ngayMuon, hanTra, soHieuSach, SinhVien(ten, tuoi, lop))
+//
+//    // thêm vào danh sách
+    ql.themTheMuon(theMoi)
+//
     tiepTuc()
 
 }
@@ -210,5 +215,4 @@ private fun tiepTuc() {
     }
     quanLy(nhapChucNang())
 }
-
 

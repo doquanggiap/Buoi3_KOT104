@@ -1,3 +1,5 @@
+package manage
+
 import model.CBGV
 
 class QuanLyCBGV {
