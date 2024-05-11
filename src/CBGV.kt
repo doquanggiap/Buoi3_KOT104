@@ -1,8 +1,6 @@
 // lương cứng, lương thưởng, tiền phạt, lương thực lĩnh
 class CBGV(var luongCung: Double, var luongThuong: Double, var tienPhat: Double,var nguoi: Nguoi) {
 
-
-
     fun tinhLuongThucLinh(): Double {
         return luongCung + luongThuong - tienPhat
     }

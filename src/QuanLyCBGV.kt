@@ -15,4 +15,20 @@ class QuanLyCBGV {
             println()
         }
     }
+
+    fun inRaDanhSach() {
+        println("---------------------Danh sách giáo viên---------------------------------------------------------")
+        // cách duyệt theo index
+        hienThiDanhSach()
+
+        println("-------------------------------------------------------------------------------------------------")
+    }
+
+    fun soLuongGV():Int {
+        return listCBGV.size
+    }
+
+    fun layDanhSach(): MutableList<CBGV> {
+        return listCBGV
+    }
 }
