@@ -1,4 +1,11 @@
-package model
+open class NguoiModel(
+    var hoTen: String,
+    var tuoi: Int?,
+    var queQuan: String?,
+    var msgv:String?
+) {
 
-// họ tên, quên quán,mã số giáo viên
-class Nguoi(var hoTen: String, var queQuan: String, var maSoGiaoVien: String)
+    open fun getThongTin(): String {
+        return "$hoTen - Tuoi: $tuoi - Que: $queQuan - msgv: $msgv"
+    }
+}

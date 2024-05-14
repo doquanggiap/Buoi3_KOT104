@@ -1,6 +1,6 @@
 package manage
 
-import model.CBGV
+import CBGV
 
 class QuanLyCBGV {
     private val listCBGV = mutableListOf<CBGV>()
@@ -10,20 +10,19 @@ class QuanLyCBGV {
     }
 
     fun xoaCBGV(maSoGV: String) {
-        listCBGV.removeAll { it.nguoi.maSoGiaoVien == maSoGV }
+        listCBGV.removeAll { it.msgv == maSoGV }
     }
 
     fun inRaDanhSach() {
         println("---------------------Danh sách giáo viên---------------------------------------------------------")
         // cách duyệt theo index
-        listCBGV.forEach {
-            it.inThongTin()
+        for (item in listCBGV) {
+            println(item.getThongTin())
         }
-
         println("-------------------------------------------------------------------------------------------------")
     }
 
-    fun soLuongGV():Int {
+    fun soLuongGV(): Int {
         return listCBGV.size
     }
 

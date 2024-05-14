@@ -1,6 +1,4 @@
 import manage.QuanLyThuVien
-import model.CBGV
-import model.Nguoi
 import model.SinhVien
 import model.TheMuon
 import kotlin.system.exitProcess

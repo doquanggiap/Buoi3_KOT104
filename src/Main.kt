@@ -1,20 +1,13 @@
 import manage.QuanLyCBGV
-import model.CBGV
-import model.Nguoi
 import kotlin.system.exitProcess
 
 private val ql = QuanLyCBGV()
 
 fun main() {
 
-    val nguoi1 = Nguoi("Nguyễn Văn A", "Hà Nội", "GV001")
-    val cbgv1 = CBGV(1000.0, 200.0, 50.0, nguoi1)
-
-    val nguoi2 = Nguoi("Nguyễn Văn B", "Hà Nội", "GV002")
-    val cbgv2 = CBGV(2000.0, 300.0, 100.0, nguoi2)
+    val cbgv1 = CBGV("Do Quang GIap", 15, "Ha Noi", "034343", 100000f, 343f, 6566f)
 
     ql.themCBGV(cbgv1)
-    ql.themCBGV(cbgv2)
 
     ql.inRaDanhSach()
     quanLy(nhapChucNang())
@@ -79,9 +72,11 @@ private fun xoa() {
         }
     }
 
-    var canXoa = ql.layDanhSach().elementAt(xoa - 1).nguoi.maSoGiaoVien
+    var canXoa = ql.layDanhSach().elementAt(xoa - 1).msgv
 
-    ql.xoaCBGV(canXoa)
+    if (canXoa != null) {
+        ql.xoaCBGV(canXoa)
+    }
     tiepTuc()
 }
 
@@ -142,11 +137,11 @@ private fun them() {
     }
 
     // validate và nhập lương cứng
-    var luongCung: Double
+    var luongCung: Float
     while (true) {
         try {
             print("Lương cứng: ")
-            luongCung = readLine()!!.toDouble()
+            luongCung = readLine()!!.toFloat()
             if (luongCung < 0) {
                 println("Vui lòng nhập lương lớn hơn 0")
                 continue
@@ -158,11 +153,11 @@ private fun them() {
     }
 
     // validate và nhập lương thưởng
-    var luongThuong: Double
+    var luongThuong: Float
     while (true) {
         try {
             print("Lương thưởng: ")
-            luongThuong = readLine()!!.toDouble()
+            luongThuong = readLine()!!.toFloat()
             if (luongThuong < 0) {
                 println("Vui lòng nhập lương lớn hơn 0")
                 continue
@@ -174,11 +169,11 @@ private fun them() {
     }
 
     // validate và nhập tiền phạt
-    var tienPhat: Double
+    var tienPhat: Float
     while (true) {
         try {
             print("Tiền phạt: ")
-            tienPhat = readLine()!!.toDouble()
+            tienPhat = readLine()!!.toFloat()
             if (tienPhat < 0) {
                 println("Vui lòng nhập tiền phạt lớn hơn 0")
                 continue
@@ -191,7 +186,7 @@ private fun them() {
 
 
     // tạo đối tượng mới
-    val gvMoi = CBGV(luongCung, luongThuong, tienPhat, Nguoi(ten, queQuan, msgv))
+    val gvMoi = CBGV(ten, tuoi, queQuan, msgv, luongCung, luongThuong, tienPhat)
 
     // thêm vào danh sách
     ql.themCBGV(gvMoi)
