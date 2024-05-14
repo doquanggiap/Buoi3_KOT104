@@ -7,10 +7,8 @@ private val ql = QuanLyThuVien()
 
 fun main() {
 
-    val the1 = TheMuon("001", 1, 2, "SH001", SinhVien("Nguyễn Văn A", 20, "K62"))
-    val the2 = TheMuon("002", 2, 3, "SH002", SinhVien("Nguyễn Văn B", 21, "K63"))
+    val the2 = TheMuon("Phung van hduy", 11, "fdfdf", "fdfdf", 15, 16, "dfdff")
 
-    ql.themTheMuon(the1)
     ql.themTheMuon(the2)
 
     ql.inRaDanhSach()
@@ -154,7 +152,7 @@ private fun them() {
         try {
             print("Ngày mượn: ")
             ngayMuon = readLine()!!.toInt()
-            if (ngayMuon < 0|| ngayMuon > 31) {
+            if (ngayMuon < 0 || ngayMuon > 31) {
                 println("Vui lòng nhập ngày > 0 và < 31")
                 continue
             }
@@ -170,7 +168,7 @@ private fun them() {
         try {
             print("Hạn trả: ")
             hanTra = readLine()!!.toInt()
-            if (hanTra < 0|| hanTra > 31) {
+            if (hanTra < 0 || hanTra > 31) {
                 println("Vui lòng nhập hạn trả > 0 và < 31")
                 continue
             }
@@ -194,7 +192,7 @@ private fun them() {
 
 
     // tạo đối tượng mới
-    val theMoi = TheMuon(maPhieu, ngayMuon, hanTra, soHieuSach, SinhVien(ten, tuoi, lop))
+    val theMoi = TheMuon(ten, tuoi, lop, maPhieu, ngayMuon, hanTra, soHieuSach)
 //
 //    // thêm vào danh sách
     ql.themTheMuon(theMoi)

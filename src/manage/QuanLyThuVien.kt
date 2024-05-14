@@ -17,13 +17,13 @@ class QuanLyThuVien {
         println("---------------------Danh sách thẻ mượn---------------------------------------------------------")
         // cách duyệt theo index
         listTheMuon.forEach {
-            it.inRaThongTin()
+            println(it.getThongTin())
         }
 
         println("-------------------------------------------------------------------------------------------------")
     }
 
-    fun soLuongTheMuon():Int {
+    fun soLuongTheMuon(): Int {
         return listTheMuon.size
     }
 
